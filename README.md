@@ -31,7 +31,7 @@ logging configuration accordly with its
 
 E.g. log email in console:
 
-```json
+```
 logger pushmail{
   %% Console appender with level set to debug
   console_appender cmd{
@@ -43,7 +43,7 @@ logger pushmail{
 
 E.g. log email to file:
 
-```json
+```
 logger pushmail{
   file_appender file{
     dir = "/var/log/myapp",
@@ -81,7 +81,7 @@ pushmail:send(Mail, AppCtx).
 Build
 -----
 
-    $ rebar3 compile
+    $ ./utils/rebar3 compile
 
 
 Tests
