@@ -18,19 +18,22 @@
 %%% @doc Application log4erl backend: it use log4erl to log sent email.
 %%% @end
 
--module(pushmail_backend_lag4erl).
+-module(pushmail_backend_error_logger).
 
 -author('Leonardo Rossi <leonardo.rossi@studenti.unipr.it>').
 
 -behaviour(pushmail_backend).
 
--export([start/1, stop/1, send/2]).
+-export([start/0, start/1, stop/1, send/2]).
+
+-spec start() ->
+  {ok, pushmail:appctx()} | {error: term()}.
+start() ->
+  {ok, ok}.
 
 -spec start(pushmail:appctx()) ->
   {ok, pushmail:appctx()} | {error: term()}.
 start(AppCtx) ->
-  application:ensure_all_started(log4erl),
-  log4erl:conf(AppCtx),
   {ok, AppCtx}.
 
 -spec stop(pushmail:appctx()) -> ok | {error: term()}.
@@ -41,5 +44,5 @@ stop(_) ->
 -spec send(pushmail:mail(), pushmail:appctx()) ->
   {ok, pushmail:appctx()} | {error, term()}.
 send(Mail, AppCtx) ->
-  log4erl:debug(pushmail, io_lib:format("~p", [Mail])),
+  error_logger:info_msg("Mail sent: ~p", [Mail]),
   {ok, AppCtx}.

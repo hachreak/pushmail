@@ -9,62 +9,34 @@ An OTP generic framework to handle different plugin to send email.
 Configuration
 -------------
 
+To configure for example the plugin to log the email sent.
+
 ```erlang
 [
   {pushmail, [
-    {backend, pushmail_backend_lag4erl}
+    {backend, pushmail_backend_error_logger}
   ]}
 ]
 ```
 
 
-Plugins
--------
+Usage
+-----
 
-**Log4erl**
-
-Simply log email that are sent (without do nothing more).
-
-To configure the plugin, create a file `priv/log4erl.conf` where you can write
-logging configuration accordly with its
-[semantics](https://github.com/ahmednawras/log4erl).
-
-E.g. log email in console:
-
-```
-logger pushmail{
-  %% Console appender with level set to debug
-  console_appender cmd{
-    level = debug,
-    format = '[%L] %I %l%n'
-  }
-}
-```
-
-E.g. log email to file:
-
-```
-logger pushmail{
-  file_appender file{
-    dir = "/var/log/myapp",
-    level = debug,
-    file = "mail",
-    type = size,
-    max = 100000,
-    suffix = log,
-    rotation = 5,
-    format = '[%L] %I %l%n'
-  }
-}
-```
-
-To load the plugin you need to configure `pushmail` and start it with:
+Start `pushmail` with arguments or without (e.g. you don't need nothing
+special to start the `error_logger` plugin):
 
 ```erlang
-{ok, AppCtx} = pushmail:start("priv/log4erl.conf").
+{ok, AppCtx} = pushmail:start(...).
 ```
 
-After that, you are ready to log email with:
+or
+
+```erlang
+{ok, AppCtx} = pushmail:start().
+```
+
+After that, you are ready to send email with:
 
 ```erlang
 Mail = #{
@@ -74,7 +46,30 @@ Mail = #{
   message => <<"My message!">>,
   headers => {}
 },
-pushmail:send(Mail, AppCtx).
+{ok, NewAppCtx} = pushmail:send(Mail, AppCtx).
+```
+
+To stop the application:
+
+```erlang
+pushmail:stop(NewAppCtx).
+```
+
+Plugins
+-------
+
+**error_log**
+
+The plugin simply log in console the email sent (without do nothing more).
+
+To load the plugin you need to configure `pushmail` and start it with:
+
+```erlang
+[
+  {pushmail, [
+    {backend, pushmail_backend_error_logger}
+  ]}
+]
 ```
 
 

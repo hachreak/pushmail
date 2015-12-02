@@ -18,6 +18,11 @@
 %% API functions
 %%====================================================================
 
+-spec start() ->
+  {ok, pushmail:appctx()} | {error: term()}.
+start() ->
+  ?BACKEND:start().
+
 -spec start(pushmail:appctx()) ->
   {ok, pushmail:appctx()} | {error: term()}.
 start(AppCtx) ->
