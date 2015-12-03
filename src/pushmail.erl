@@ -1,7 +1,7 @@
 -module('pushmail').
 
 %% API exports
--export([start/1, stop/1, send/2]).
+-export([start/0, start/1, stop/1, send/2]).
 
 %%% Macros ===========================================================
 -define(BACKEND, (pushmail_config:backend())).
