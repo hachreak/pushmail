@@ -15,7 +15,8 @@
 %%% along with this software; if not, write to the Free Software Foundation,
 %%% Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
 %%%
-%%% @doc Application log4erl backend: it use log4erl to log sent email.
+%%% @doc Application error_logger backend: it use erlang error_logger
+%%%      to log sent email.
 %%% @end
 
 -module(pushmail_backend_error_logger).
