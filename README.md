@@ -33,6 +33,7 @@ special to start the `error_logger` plugin):
 or
 
 ```erlang
+application:ensure_all_started(pushmail).
 {ok, AppCtx} = pushmail:start().
 ```
 

@@ -45,5 +45,5 @@ stop(_) ->
 -spec send(pushmail:mail(), pushmail:appctx()) ->
   {ok, pushmail:appctx()} | {error, term()}.
 send(Mail, AppCtx) ->
-  error_logger:info_msg("Mail sent: ~p", [Mail]),
+  error_logger:info_msg("Mail sent: ~p~n", [Mail]),
   {ok, AppCtx}.
