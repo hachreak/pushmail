@@ -2,4 +2,6 @@ language: erlang
 otp_release:
   - 18.0
   - 18.1
+  - 18.2
+install: echo "hello world"
 script: "./utils/rebar3 eunit"
